@@ -65,6 +65,28 @@ hr{
     
 }
 
+.buttons{
+    display: flex;
+    align-items: center;
+    
+}
+
+.buttons button{
+font-weight: bold;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+cursor: pointer;
+    height: 20px;
+    width: 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 7px;    
+}
+
+.buttons p{
+    padding: 0px 10px; 
+}
+
 
 .item  p{
     font-size: 10px;

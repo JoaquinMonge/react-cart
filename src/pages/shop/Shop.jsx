@@ -10,19 +10,19 @@ export const Shop = () => {
 
   setTimeout(() => {
     setIsLoading(false);
-  }, 3000);
+  }, 2000);
 
   return (
     <div className="shop">
       <div className="products">
         {isLoading ? (
-          <div class="sk-chase">
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
+          <div className="sk-chase">
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
           </div>
         ) : (
           products.map((product) => (

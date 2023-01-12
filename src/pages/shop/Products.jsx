@@ -23,15 +23,15 @@ export const Products = (props) => {
       console.log("The product has been added to cart:", items);
     }
 
-    const result = items.reduce(function (acc, obj) {
-      return acc + obj.quantity;
-    }, 0);
-    getTotalItems(result);
+    // const result = items.reduce(function (acc, obj) {
+    //   return acc + obj.quantity;
+    // }, 0);
+    // getTotalItems(result);
 
-    const subtotal = items.reduce(function (acc, obj) {
-      return acc + obj.price * obj.quantity;
-    }, 0);
-    getSubTotal(subtotal);
+    // const subtotal = items.reduce(function (acc, obj) {
+    //   return acc + obj.price * obj.quantity;
+    // }, 0);
+    // getSubTotal(subtotal);
   };
 
   return (
@@ -42,7 +42,7 @@ export const Products = (props) => {
         <p className="cat">{category}</p>
         <img src={image} alt="" />
         <p className="price">${price}</p>
-        <p>{quantity}</p>
+
         <button className="addCart" onClick={add}>
           Add To Cart
         </button>
