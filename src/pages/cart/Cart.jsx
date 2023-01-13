@@ -1,17 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../../CartContext";
 import "./Cart.css";
 
 export const Cart = () => {
-  const { items } = useContext(CartContext);
+  const { items, itQty, setItems } = useContext(CartContext);
+  items.map((it) => {
+    if (it.quantity === 0) {
+      setItems(items.filter((it) => it.quantity !== 0));
+    }
+  });
+
+  //pasar todas las otras funciones afuera para que se validen y funcionen ya que como subi esta las otras no se eejceutan
 
   const [qty, setQty] = useState();
   const [totalIt, setTotalIt] = useState(() => {
     const result = items.reduce(function (acc, obj) {
       return acc + obj.quantity;
     }, 0);
+
     return result;
   });
+
   const [getSub, setGetSub] = useState(() => {
     const result = items.reduce(function (acc, obj) {
       return acc + obj.price * obj.quantity;
@@ -28,6 +37,7 @@ export const Cart = () => {
       return acc + obj.quantity;
     }, 0);
     setTotalIt(result);
+    itQty(result);
 
     const subtotal = items.reduce(function (acc, obj) {
       return acc + obj.price * obj.quantity;
@@ -38,11 +48,25 @@ export const Cart = () => {
   const removeItem = (id) => {
     const check_index = items.findIndex((item) => item.id === id);
 
-    setQty(items[check_index].quantity--);
     const result = items.reduce(function (acc, obj) {
       return acc + obj.quantity;
     }, 0);
-    setTotalIt(result);
+
+    if (items[check_index]?.quantity !== 0) {
+      setQty(items[check_index].quantity--);
+      setTotalIt(result);
+      // itQty(result);
+
+      console.log(items);
+    } else if (items[check_index]?.quantity <= 0) {
+      itQty(result);
+
+      setItems(
+        items.filter((it) => it.quantity !== items[check_index].quantity)
+      );
+    } else if (result < 0) {
+      return;
+    }
 
     const subtotal = items.reduce(function (acc, obj) {
       return acc + obj.price * obj.quantity;

@@ -7,31 +7,19 @@ const CartContext = createContext(null);
 export function CartProvider(props) {
   const products = fetchProducts();
   const [items, setItems] = useState([]);
-  const [totalIt, setTotalIt] = useState();
-  const [getSub, setGetSub] = useState();
+  const [totalIt, setTotalIt] = useState(0);
 
-  const addToCart = (id, title, price, image) => {
-    setItems((prevState) => [...prevState, { id, title, price, image }]);
+  const itQty = (qty) => {
+    setTotalIt(qty);
   };
-
-  // const getTotalItems = (result) => {
-  //   setTotalIt(result);
-  // };
-  // const getSubTotal = (sub) => {
-  //   setGetSub(sub);
-  // };
 
   return (
     <CartContext.Provider
       value={{
         items,
-        addToCart,
-
-        // getTotalItems,
-        // getSubTotal,
-
-        // totalIt,
-        // getSub,
+        totalIt,
+        itQty,
+        setItems,
       }}
     >
       {props.children}

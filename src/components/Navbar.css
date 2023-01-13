@@ -6,8 +6,28 @@
     justify-content:space-between;
     align-items: center;
     
+    
   
 }
+
+
+.navCart {
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+    
+}
+
+.navCart span{
+    margin-left: 95.5px;
+}
+
+
+
+
+
+
 
 
 
@@ -15,7 +35,8 @@
 .links a{
     text-decoration: none;
     color: white;
-    margin: 90px;
+   
+    margin: 0px 90px;
     font-size: 30px;
     font-weight: bold;
 }

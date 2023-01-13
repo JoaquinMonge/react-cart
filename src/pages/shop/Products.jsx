@@ -3,11 +3,10 @@ import CartContext from "../../CartContext";
 import { fetchProducts } from "./fetchProducts";
 
 export const Products = (props) => {
-  const [ID, setID] = useState([]);
   const { id, title, price, category, image } = props.data;
   const products = fetchProducts();
 
-  const { addToCart, items, quantity, getTotalItems, getSubTotal } =
+  const { addToCart, items, itQty, getTotalItems, getSubTotal } =
     useContext(CartContext);
 
   const add = () => {
@@ -23,15 +22,11 @@ export const Products = (props) => {
       console.log("The product has been added to cart:", items);
     }
 
-    // const result = items.reduce(function (acc, obj) {
-    //   return acc + obj.quantity;
-    // }, 0);
-    // getTotalItems(result);
-
-    // const subtotal = items.reduce(function (acc, obj) {
-    //   return acc + obj.price * obj.quantity;
-    // }, 0);
-    // getSubTotal(subtotal);
+    itQty(
+      items.reduce(function (acc, obj) {
+        return acc + obj.quantity;
+      }, 0)
+    );
   };
 
   return (
