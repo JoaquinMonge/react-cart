@@ -3,24 +3,8 @@ import CartContext from "../../CartContext";
 import "./Cart.css";
 
 export const Cart = () => {
-  const { items, itQty, setItems } = useContext(CartContext);
-  items.map((it) => {
-    if (it.quantity === 0) {
-      setItems(items.filter((it) => it.quantity !== 0));
-    }
-  });
-  //siaalkncnjc
-
-  //pasar todas las otras funciones afuera para que se validen y funcionen ya que como subi esta las otras no se eejceutan
-
-  const [qty, setQty] = useState();
-  const [totalIt, setTotalIt] = useState(() => {
-    const result = items.reduce(function (acc, obj) {
-      return acc + obj.quantity;
-    }, 0);
-
-    return result;
-  });
+  const { items, itQty, setItems, totalIt, setTotalIt } =
+    useContext(CartContext);
 
   const [getSub, setGetSub] = useState(() => {
     const result = items.reduce(function (acc, obj) {
@@ -28,6 +12,35 @@ export const Cart = () => {
     }, 0);
     return result;
   });
+
+  items.map((it) => {
+    if (it.quantity === 0) {
+      setItems(items.filter((it) => it.quantity !== 0));
+    }
+  });
+
+  const result = items.reduce(function (acc, obj) {
+    return acc + obj.quantity;
+  }, 0);
+  setTotalIt(result);
+
+  useEffect(() => {
+    const subtotal = items.reduce(function (acc, obj) {
+      return acc + obj.price * obj.quantity;
+    }, 0);
+    setGetSub(subtotal);
+  }, [setGetSub, items]);
+
+  //pasar todas las otras funciones afuera para que se validen y funcionen ya que como subi esta las otras no se eejceutan
+
+  const [qty, setQty] = useState();
+  // const [totalIt, setTotalIt] = useState(() => {
+  //   const result = items.reduce(function (acc, obj) {
+  //     return acc + obj.quantity;
+  //   }, 0);
+
+  //   return result;
+  // });
 
   const addItem = (id) => {
     const check_index = items.findIndex((item) => item.id === id);
@@ -38,6 +51,7 @@ export const Cart = () => {
       return acc + obj.quantity;
     }, 0);
     setTotalIt(result);
+
     itQty(result);
 
     const subtotal = items.reduce(function (acc, obj) {
@@ -47,24 +61,13 @@ export const Cart = () => {
   };
 
   const removeItem = (id) => {
+    //
     const check_index = items.findIndex((item) => item.id === id);
-
-    const result = items.reduce(function (acc, obj) {
-      return acc + obj.quantity;
-    }, 0);
 
     if (items[check_index]?.quantity !== 0) {
       setQty(items[check_index].quantity--);
-      setTotalIt(result);
-      // itQty(result);
 
-      console.log(items);
-    } else if (items[check_index]?.quantity <= 0) {
       itQty(result);
-
-      setItems(
-        items.filter((it) => it.quantity !== items[check_index].quantity)
-      );
     } else if (result < 0) {
       return;
     }
@@ -73,6 +76,13 @@ export const Cart = () => {
       return acc + obj.price * obj.quantity;
     }, 0);
     setGetSub(subtotal);
+  };
+  const deleteItem = (id) => {
+    items.map((it) => {
+      if (it.id === id) {
+        setItems(items.filter((it) => it.id !== id));
+      }
+    });
   };
 
   return (
@@ -91,9 +101,25 @@ export const Cart = () => {
                 <p>${item.price}</p>
                 <div>
                   <div className="buttons">
-                    <button onClick={() => removeItem(item.id)}>-</button>
+                    <button
+                      className="buttAction"
+                      onClick={() => removeItem(item.id)}
+                    >
+                      -
+                    </button>
                     <p>Quantity: {item.quantity}</p>
-                    <button onClick={() => addItem(item.id)}>+</button>
+                    <button
+                      className="buttAction"
+                      onClick={() => addItem(item.id)}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="otherButtons"
+                      onClick={() => deleteItem(item.id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>

@@ -20,6 +20,7 @@ export function CartProvider(props) {
         totalIt,
         itQty,
         setItems,
+        setTotalIt
       }}
     >
       {props.children}

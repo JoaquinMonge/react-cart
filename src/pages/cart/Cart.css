@@ -72,7 +72,11 @@ hr{
 }
 
 .buttons button{
-font-weight: bold;
+ 
+}
+
+.buttAction{
+    font-weight: bold;
 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 cursor: pointer;
     height: 20px;
@@ -80,11 +84,36 @@ cursor: pointer;
     color: white;
     background-color: black;
     border: none;
-    border-radius: 7px;    
+    border-radius: 7px;   
+
+
+}
+
+.buttAction:hover{
+    box-shadow: none;
 }
 
 .buttons p{
     padding: 0px 10px; 
+}
+
+.otherButtons{
+    background-color: black;
+    color:white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 20px;
+    width: 200px;
+    border: none;
+    margin:  0px 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+
+
+}
+
+.otherButtons:hover{
+    box-shadow: none;
 }
 
 
