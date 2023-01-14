@@ -9,6 +9,7 @@ export const Cart = () => {
       setItems(items.filter((it) => it.quantity !== 0));
     }
   });
+  //siaalkncnjc
 
   //pasar todas las otras funciones afuera para que se validen y funcionen ya que como subi esta las otras no se eejceutan
 
