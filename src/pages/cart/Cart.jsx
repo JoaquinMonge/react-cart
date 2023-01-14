@@ -31,7 +31,6 @@ export const Cart = () => {
     setGetSub(subtotal);
   }, [setGetSub, items]);
 
-  //pasar todas las otras funciones afuera para que se validen y funcionen ya que como subi esta las otras no se eejceutan
 
   const [qty, setQty] = useState();
   // const [totalIt, setTotalIt] = useState(() => {
