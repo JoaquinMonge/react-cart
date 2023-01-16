@@ -22,15 +22,10 @@ hr{
 .container{
     display: grid;
     grid-template-columns: 2fr 0.5fr;
-    gap:90px;
+    gap: 20px;
     margin: 20px;
     border-radius: 10px;
-    
    
-    
-    
-    
-
 }
 
 .others{
@@ -127,3 +122,154 @@ img{
     height: 100px;
     /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
 }
+
+@media only screen and (max-width: 600px) {
+    .item{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 10px;
+        text-align: center;
+        
+    
+    }
+    
+    
+    .productsCart{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 5px;
+        padding: 0px;
+    }
+
+    .shoppingTitle{
+        text-align: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 20px;
+    }
+    
+    hr{
+        height: 1px;
+        background-color: #ccc;
+        border: none;
+    }
+    
+   
+    
+    .others{
+        font-size: 10px;
+        margin-left: 2px;
+    }
+    
+    .items{
+        display: flex;
+        
+    }
+
+    h2{
+        font-size: 10px;
+    }
+    
+    
+    .total{
+        font-size: 10px;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 10px;
+        margin-bottom: 50px;
+        padding: 10px;
+    }
+    
+    .total button{
+        height: 30px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        
+        border: 1px solid transparent;
+        border-radius: 30px;
+        background-color: rgb(250, 207, 50);
+        cursor: pointer;
+    }
+    
+    .total button:hover{
+        box-shadow: none;
+        
+    }
+    
+    .buttons{
+        display: flex;
+        align-items: center;
+        
+    }
+    
+    .buttons button{
+     
+    }
+    
+    .buttAction{
+        font-weight: bold;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        cursor: pointer;
+        height: 20px;
+        width: 20px;
+        color: white;
+        background-color: black;
+        border: none;
+        border-radius: 7px;  
+        
+    
+    
+    }
+
+    .qty{
+        margin: 1px;
+        
+    }
+    
+    .buttAction:hover{
+        box-shadow: none;
+    }
+    
+    .buttons p{
+        padding: 0px 10px; 
+    }
+    
+    .otherButtons{
+        background-color: black;
+        color:white;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        height: 20px;
+        width: 70px;
+        border: none;
+        margin:  0px 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 10px;
+        
+    
+    
+    }
+    
+    .otherButtons:hover{
+        box-shadow: none;
+    }
+    
+    
+    .item  p{
+        font-size: 10px;
+    }
+    
+    
+    img{
+        margin: 2px;
+        width: 50px;
+        height: 70px;
+        /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    }
+
+    .container{
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+       
+    }
+
+
+}
+

@@ -31,7 +31,6 @@ export const Cart = () => {
     setGetSub(subtotal);
   }, [setGetSub, items]);
 
-
   const [qty, setQty] = useState();
   // const [totalIt, setTotalIt] = useState(() => {
   //   const result = items.reduce(function (acc, obj) {
@@ -87,7 +86,7 @@ export const Cart = () => {
   return (
     <div className="container">
       <div className="productsCart">
-        <h1>Shopping Cart</h1>
+        <h1 className="shoppingTitle">Shopping Cart</h1>
         {items?.map((item) => (
           <div key={item.id}>
             <div className="items">
@@ -106,7 +105,7 @@ export const Cart = () => {
                     >
                       -
                     </button>
-                    <p>Quantity: {item.quantity}</p>
+                    <p className="qty">Quantity: {item.quantity}</p>
                     <button
                       className="buttAction"
                       onClick={() => addItem(item.id)}
