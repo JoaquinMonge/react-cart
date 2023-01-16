@@ -116,3 +116,32 @@
       transform: scale(1.0); 
     } 
   }
+
+  @media only screen and (max-width: 600px) {
+
+    .products{
+      display: flex;
+      flex: column;
+      overflow-x: scroll;
+    }
+
+    .card{
+      text-align: center;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 10px;
+      width: 200px;
+      height: 400px;
+      font-size: 15px;
+      
+      
+  }
+  .products img{
+    width:90px;
+    height: 100px;
+    padding: 10px;
+}
+
+  
+
+
+  }
