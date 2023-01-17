@@ -145,3 +145,22 @@
 
 
   }
+
+  @media only screen and (max-width: 800px) {
+
+   
+
+    .card{
+      text-align: center;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 10px;
+      font-size: 15px;
+  }
+  .products img{
+    width:120px;
+    height: 140px;
+    padding: 10px;
+}
+  }
+
+  

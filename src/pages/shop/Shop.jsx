@@ -7,11 +7,10 @@ import "./shop.css";
 export const Shop = () => {
   const products = fetchProducts();
   const [isLoading, setIsLoading] = useState(true);
-  
 
   setTimeout(() => {
     setIsLoading(false);
-  }, 2000);
+  }, 1000);
 
   return (
     <div className="shop">

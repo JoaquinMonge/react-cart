@@ -5,9 +5,9 @@ import "./Navbar.css";
 export const Categories = () => {
   return (
     <div className="categories">
-      <div class="dropdown">
+      <div className="dropdown">
         <span>Categories</span>
-        <div class="dropdown-content">
+        <div className="dropdown-content">
           <Link to="/">
             <p>All Categories</p>
           </Link>

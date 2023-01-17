@@ -31,19 +31,10 @@ export const Cart = () => {
     setGetSub(subtotal);
   }, [setGetSub, items]);
 
-  const [qty, setQty] = useState();
-  // const [totalIt, setTotalIt] = useState(() => {
-  //   const result = items.reduce(function (acc, obj) {
-  //     return acc + obj.quantity;
-  //   }, 0);
-
-  //   return result;
-  // });
-
   const addItem = (id) => {
     const check_index = items.findIndex((item) => item.id === id);
     if (check_index !== -1) {
-      setQty(items[check_index].quantity++);
+      itQty(items[check_index].quantity++);
     }
     const result = items.reduce(function (acc, obj) {
       return acc + obj.quantity;
@@ -63,7 +54,7 @@ export const Cart = () => {
     const check_index = items.findIndex((item) => item.id === id);
 
     if (items[check_index]?.quantity !== 0) {
-      setQty(items[check_index].quantity--);
+      itQty(items[check_index].quantity--);
 
       itQty(result);
     } else if (result < 0) {
@@ -75,6 +66,7 @@ export const Cart = () => {
     }, 0);
     setGetSub(subtotal);
   };
+
   const deleteItem = (id) => {
     items.map((it) => {
       if (it.id === id) {

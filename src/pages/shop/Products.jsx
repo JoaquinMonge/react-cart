@@ -6,8 +6,7 @@ export const Products = (props) => {
   const { id, title, price, category, image } = props.data;
   const products = fetchProducts();
 
-  const { addToCart, items, itQty, getTotalItems, getSubTotal } =
-    useContext(CartContext);
+  const { items, itQty } = useContext(CartContext);
 
   const add = () => {
     // addToCart(id, title, price, image, quantity);
