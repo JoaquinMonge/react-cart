@@ -4,9 +4,11 @@ import { MagnifyingGlass, ShoppingCart } from "phosphor-react";
 import "./Navbar.css";
 import CartContext from "../CartContext";
 import { AiOutlineSearch } from "react-icons/ai";
+import UserContext from "../UserContext";
 
 export const Navbar = () => {
   const { items, totalIt } = useContext(CartContext);
+  const { authUser, handleSignOut } = useContext(UserContext);
 
   return (
     <div className="navbar links">
@@ -25,7 +27,16 @@ export const Navbar = () => {
         </button>
       </form>
 
-      <p className="signIn">Sign In</p>
+      {authUser ? (
+        <p onClick={handleSignOut} className="signOut">
+          Sign Out
+        </p>
+      ) : (
+        <Link to="/signin">
+          <p className="signIn">Sign In</p>
+        </Link>
+      )}
+
       <div className="navCart">
         <span>({totalIt})</span>
         <Link to="/cart">

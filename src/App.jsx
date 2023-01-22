@@ -11,15 +11,21 @@ import { Mens } from "./components/Categories/Mens";
 import { Womens } from "./components/Categories/Womens";
 import { Electronics } from "./components/Categories/Electronics";
 import { Jewelery } from "./components/Categories/Jewerly";
+import { SignIn } from "./components/SignIn";
+import { SignUp } from "./components/SignUp";
+import { UserProvider } from "./UserContext";
 
 function App() {
   return (
     <div className="App">
+      <UserProvider>
       <CartProvider>
         <Router>
           <Navbar />
           <Categories />
           <Routes>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
             <Route path="/" element={<Shop />} />
             <Route path="/mens" element={<Mens />} />
             <Route path="/womens" element={<Womens />} />
@@ -30,6 +36,7 @@ function App() {
           </Routes>
         </Router>
       </CartProvider>
+      </UserProvider>
     </div>
   );
 }
