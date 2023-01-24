@@ -7,7 +7,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import UserContext from "../UserContext";
 
 export const Navbar = () => {
-  const { items, totalIt } = useContext(CartContext);
+  const { items, totalIt, setItems, itQty } = useContext(CartContext);
   const { authUser, handleSignOut } = useContext(UserContext);
 
   return (
@@ -28,7 +28,14 @@ export const Navbar = () => {
       </form>
 
       {authUser ? (
-        <p onClick={handleSignOut} className="signOut">
+        <p
+          onClick={() => {
+            handleSignOut();
+            setItems([]);
+            itQty(0);
+          }}
+          className="signOut"
+        >
           Sign Out
         </p>
       ) : (

@@ -18,25 +18,25 @@ import { UserProvider } from "./UserContext";
 function App() {
   return (
     <div className="App">
-      <UserProvider>
       <CartProvider>
-        <Router>
-          <Navbar />
-          <Categories />
-          <Routes>
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/" element={<Shop />} />
-            <Route path="/mens" element={<Mens />} />
-            <Route path="/womens" element={<Womens />} />
-            <Route path="/jewelery" element={<Jewelery />} />
-            <Route path="/electronics" element={<Electronics />} />
+        <UserProvider>
+          <Router>
+            <Navbar />
+            <Categories />
+            <Routes>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/" element={<Shop />} />
+              <Route path="/mens" element={<Mens />} />
+              <Route path="/womens" element={<Womens />} />
+              <Route path="/jewelery" element={<Jewelery />} />
+              <Route path="/electronics" element={<Electronics />} />
 
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </Router>
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </Router>
+        </UserProvider>
       </CartProvider>
-      </UserProvider>
     </div>
   );
 }

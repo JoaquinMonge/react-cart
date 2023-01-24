@@ -5,7 +5,8 @@ import { auth, db } from "../firebase";
 import "./Signin.css";
 import { Link } from "react-router-dom";
 import UserContext from "../UserContext";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc } from "firebase/firestore";
+import CartContext from "../CartContext";
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,11 +14,23 @@ export const SignIn = () => {
 
   const { authUser } = useContext(UserContext);
 
+  const { setItems, items, itQty, setTotalIt } = useContext(CartContext);
+
   const handleSignIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        // console.log(userCredential.user.email);
+        onSnapshot(doc(db, "users", userCredential.user.email), (doc) => {
+          const data = doc.data().cartItems;
+          // data.map((it) => console.log(it.quantity));
+          const result = data.reduce(function (acc, obj) {
+            return acc + obj.quantity;
+          }, 0);
+          // console.log(result);
+          itQty(result);
+          setItems(data);
+        });
       })
       .catch((error) => {
         console.log(error);

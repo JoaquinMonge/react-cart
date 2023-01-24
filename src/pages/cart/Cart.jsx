@@ -1,10 +1,30 @@
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../../CartContext";
+import { auth, db } from "../../firebase";
+import UserContext from "../../UserContext";
 import "./Cart.css";
 
 export const Cart = () => {
   const { items, itQty, setItems, totalIt, setTotalIt } =
     useContext(CartContext);
+
+  const { authUser } = useContext(UserContext);
+
+  useEffect(() => {
+    if (authUser) {
+      onSnapshot(doc(db, "users", authUser.email), (doc) => {
+        const data = doc.data().cartItems;
+        // data.map((it) => console.log(it.quantity));
+        const result = data.reduce(function (acc, obj) {
+          return acc + obj.quantity;
+        }, 0);
+        // console.log(result);
+        itQty(result);
+        setItems(data);
+      });
+    }
+  }, [authUser]);
 
   const [getSub, setGetSub] = useState(() => {
     const result = items.reduce(function (acc, obj) {
@@ -65,6 +85,11 @@ export const Cart = () => {
       return acc + obj.price * obj.quantity;
     }, 0);
     setGetSub(subtotal);
+
+    const saveCart = doc(db, "users", authUser.email);
+    updateDoc(saveCart, {
+      cartItems: items,
+    });
   };
 
   const deleteItem = (id) => {
@@ -72,6 +97,10 @@ export const Cart = () => {
       if (it.id === id) {
         setItems(items.filter((it) => it.id !== id));
       }
+    });
+    const saveCart = doc(db, "users", authUser.email);
+    updateDoc(saveCart, {
+      cartItems: items.filter((it) => it.id !== id),
     });
   };
 

@@ -7,7 +7,6 @@ import { auth, db } from "./firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
 const UserContext = createContext(null);
-
 export function UserProvider(props) {
   const [aut, setAut] = useState();
   const [authUser, setAuthUser] = useState(null);
@@ -16,11 +15,6 @@ export function UserProvider(props) {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
-        onSnapshot(doc(db, "users", user.email), (doc) => {
-          const data = doc.data().cartItems;
-          // console.log(data);
-          data.map((it) => console.log(it));
-        });
       } else {
         setAuthUser(null);
       }
