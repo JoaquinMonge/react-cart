@@ -46,12 +46,15 @@ export const SignIn = () => {
       ) : (
         <form onSubmit={handleSignIn} className="signin">
           <input
+            className="input"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
+            className="input"
+
             type="password"
             placeholder="Password"
             value={password}

@@ -34,12 +34,14 @@ export const SignUp = () => {
         <form onSubmit={handleSignUp} className="signin">
           <h2 className="title">Create Account</h2>
           <input
+            className="input"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
+            className="input"
             type="password"
             placeholder="Password"
             value={password}

@@ -4,9 +4,13 @@ import { fetchProducts } from "../../pages/shop/fetchProducts";
 import { fetchCategories } from "./fetchCategories";
 
 import "./Categories.css";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import UserContext from "../../UserContext";
 
 export const Womens = () => {
   const { items, itQty } = useContext(CartContext);
+  const { authUser } = useContext(UserContext);
 
   const products = fetchCategories("women's clothing");
 
@@ -28,6 +32,11 @@ export const Womens = () => {
         return acc + obj.quantity;
       }, 0)
     );
+
+    const saveCart = doc(db, "users", authUser?.email);
+    updateDoc(saveCart, {
+      cartItems: items,
+    });
   };
 
   return (

@@ -67,6 +67,11 @@ export const Cart = () => {
       return acc + obj.price * obj.quantity;
     }, 0);
     setGetSub(subtotal);
+
+    const saveCart = doc(db, "users", authUser.email);
+    updateDoc(saveCart, {
+      cartItems: items,
+    });
   };
 
   const removeItem = (id) => {

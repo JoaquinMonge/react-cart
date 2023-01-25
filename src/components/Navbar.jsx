@@ -44,6 +44,8 @@ export const Navbar = () => {
         </Link>
       )}
 
+      <p>{authUser?.email}</p>
+
       <div className="navCart">
         <span>({totalIt})</span>
         <Link to="/cart">

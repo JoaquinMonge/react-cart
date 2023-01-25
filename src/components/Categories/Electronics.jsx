@@ -3,11 +3,16 @@ import CartContext from "../../CartContext";
 import { fetchProducts } from "../../pages/shop/fetchProducts";
 import { fetchCategories } from "./fetchCategories";
 
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import UserContext from "../../UserContext";
+
 import "./Categories.css";
 
 export const Electronics = () => {
   const products = fetchCategories("electronics");
   const { items, itQty } = useContext(CartContext);
+  const { authUser } = useContext(UserContext);
 
   const add = (id) => {
     // addToCart(id, title, price, image, quantity);
@@ -27,6 +32,10 @@ export const Electronics = () => {
         return acc + obj.quantity;
       }, 0)
     );
+    const saveCart = doc(db, "users", authUser?.email);
+    updateDoc(saveCart, {
+      cartItems: items,
+    });
   };
 
   return (

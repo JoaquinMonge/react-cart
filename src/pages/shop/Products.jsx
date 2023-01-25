@@ -5,7 +5,7 @@ import {
   onSnapshot,
   updateDoc,
 } from "firebase/firestore";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartContext from "../../CartContext";
 import { db } from "../../firebase";
 import UserContext from "../../UserContext";
@@ -15,16 +15,31 @@ export const Products = (props) => {
   const { id, title, price, category, image } = props.data;
   const products = fetchProducts();
 
-  const { items, itQty, saveItem } = useContext(CartContext);
+  const { items, itQty, saveItem, setItems } = useContext(CartContext);
   const { authUser } = useContext(UserContext);
 
   const [carIt, setCartIt] = useState();
+
+  useEffect(() => {
+    if (authUser) {
+      onSnapshot(doc(db, "users", authUser.email), (doc) => {
+        const data = doc.data().cartItems;
+        // data.map((it) => console.log(it.quantity));
+        const result = data.reduce(function (acc, obj) {
+          return acc + obj.quantity;
+        }, 0);
+        // console.log(result);
+        itQty(result);
+        setItems(data);
+      });
+    }
+  }, [authUser]);
 
   const add = () => {
     // addToCart(id, title, price, image, quantity);
     // saveItem;
 
-    console.log(authUser.email);
+    console.log(authUser);
 
     // console.log(items);
 
@@ -47,8 +62,9 @@ export const Products = (props) => {
       );
     } else {
       alert("Please log in to save items to the cart");
+      return;
     }
-    const saveCart = doc(db, "users", authUser.email);
+    const saveCart = doc(db, "users", authUser?.email);
     updateDoc(saveCart, {
       cartItems: items,
     });
