@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import UserContext from "../UserContext";
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import CartContext from "../CartContext";
+import { setLogLevel } from "firebase/app";
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,8 +34,12 @@ export const SignIn = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        setError(true);
       });
+
+    setTimeout(() => {
+      setError(false);
+    }, 4000);
 
     setEmail("");
     setPassword("");
@@ -54,12 +59,12 @@ export const SignIn = () => {
           />
           <input
             className="input"
-
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {error ? <p className="error">Incorrect user/password</p> : ""}
           <Link to="/signup">
             <p className="create">Create account</p>
           </Link>

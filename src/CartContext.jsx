@@ -12,22 +12,29 @@ export function CartProvider(props) {
 
   const itQty = (qty) => {
     setTotalIt(qty);
-    // console.log(authUser);
   };
 
-  // const userCart = doc(db, "users", authUser.email);
+  const add = (id, products) => {
+    // addToCart(id, title, price, image, quantity);
 
-  // const saveItem = async () => {
-  //   await updateDoc(userCart, {
-  //     items: items,
-  //   });
-  // };
+    
 
-  // useEffect(() => {
-  //   const readData = onSnapshot(doc(db, "users", authUser), (doc) => {
-  //     console.log(doc.data());
-  //   });
-  // }, [items]);
+    const check_index = items.findIndex((item) => item.id === id);
+    if (check_index !== -1) {
+      items[check_index].quantity++;
+
+      console.log("Quantity updated", items);
+    } else {
+      items.push({ ...products.find((p) => p.id === id), quantity: 1 });
+      console.log("The product has been added to cart:", items);
+    }
+
+    itQty(
+      items.reduce(function (acc, obj) {
+        return acc + obj.quantity;
+      }, 0)
+    );
+  };
 
   return (
     <CartContext.Provider
@@ -37,6 +44,7 @@ export function CartProvider(props) {
         itQty,
         setItems,
         setTotalIt,
+        add,
       }}
     >
       {props.children}

@@ -12,10 +12,10 @@ export const Categories = () => {
             <p>All Categories</p>
           </Link>
           <Link to="/mens">
-            <p>Mens</p>
+            <p>Men</p>
           </Link>
           <Link to="/womens">
-            <p>Womens</p>
+            <p>Women</p>
           </Link>
           <Link to="/jewelery">
             <p>Jewerly</p>

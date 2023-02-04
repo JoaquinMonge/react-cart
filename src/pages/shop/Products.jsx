@@ -1,11 +1,5 @@
-import {
-  doc,
-  getDoc,
-  getDocFromCache,
-  onSnapshot,
-  updateDoc,
-} from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { useContext, useEffect } from "react";
 import CartContext from "../../CartContext";
 import { db } from "../../firebase";
 import UserContext from "../../UserContext";
@@ -15,61 +9,34 @@ export const Products = (props) => {
   const { id, title, price, category, image } = props.data;
   const products = fetchProducts();
 
-  const { items, itQty, saveItem, setItems } = useContext(CartContext);
+  const { items, itQty, setItems, add } = useContext(CartContext);
   const { authUser } = useContext(UserContext);
-
-  const [carIt, setCartIt] = useState();
 
   useEffect(() => {
     if (authUser) {
       onSnapshot(doc(db, "users", authUser.email), (doc) => {
         const data = doc.data().cartItems;
-        // data.map((it) => console.log(it.quantity));
         const result = data.reduce(function (acc, obj) {
           return acc + obj.quantity;
         }, 0);
-        // console.log(result);
         itQty(result);
         setItems(data);
       });
     }
   }, [authUser]);
 
-  const add = () => {
-    // addToCart(id, title, price, image, quantity);
-    // saveItem;
-
-    console.log(authUser);
-
-    // console.log(items);
-
-    const check_index = items?.findIndex((item) => item.id === id);
-
+  const addItem = async (id) => {
     if (authUser) {
-      if (check_index !== -1) {
-        items[check_index].quantity++;
+      await add(id, products);
 
-        console.log("Quantity updated", items);
-      } else {
-        items.push({ ...products.find((p) => p.id === id), quantity: 1 });
-        console.log("The product has been added to cart:", items);
-      }
-
-      itQty(
-        items.reduce(function (acc, obj) {
-          return acc + obj.quantity;
-        }, 0)
-      );
+      const saveCart = doc(db, "users", authUser?.email);
+      updateDoc(saveCart, {
+        cartItems: items,
+      });
     } else {
-      alert("Please log in to save items to the cart");
-      return;
+      alert("Please login to save an item");
     }
-    const saveCart = doc(db, "users", authUser?.email);
-    updateDoc(saveCart, {
-      cartItems: items,
-    });
   };
-
   return (
     <>
       <div className="card">
@@ -79,7 +46,7 @@ export const Products = (props) => {
         <img src={image} alt="" />
         <p className="price">${price}</p>
 
-        <button className="addCart" onClick={add}>
+        <button className="addCart" onClick={() => addItem(id)}>
           Add To Cart
         </button>
       </div>

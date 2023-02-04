@@ -11,6 +11,7 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -23,8 +24,18 @@ export const SignUp = () => {
         });
       })
       .catch((error) => {
+        if (error.code === "auth/weak-password") {
+          setError("Please try with a different password");
+        }
+        if (error.code === "auth/email-already-in-use") {
+          setError("Email already in use");
+        }
         console.log(error);
       });
+
+    setTimeout(() => {
+      setError(false);
+    }, 4000);
   };
   return (
     <>
@@ -47,6 +58,8 @@ export const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {error ? <p className="error">{error}</p> : ""}
 
           <button className="signinbtn">Sign Up</button>
         </form>

@@ -27,6 +27,14 @@ export const Navbar = () => {
         </button>
       </form>
 
+      <p className="email">{authUser?.email}</p>
+
+      <div className="navCart">
+        <span>{totalIt}</span>
+        <Link to="/cart">
+          <ShoppingCart className="shopping" />
+        </Link>
+      </div>
       {authUser ? (
         <p
           onClick={() => {
@@ -43,15 +51,6 @@ export const Navbar = () => {
           <p className="signIn">Sign In</p>
         </Link>
       )}
-
-      <p>{authUser?.email}</p>
-
-      <div className="navCart">
-        <span>({totalIt})</span>
-        <Link to="/cart">
-          <ShoppingCart className="shopping" />
-        </Link>
-      </div>
     </div>
   );
 };
